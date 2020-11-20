@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
-import '../assets/css/global.css'
 import Home from '../components/Home.vue'
 
 Vue.use(VueRouter)
