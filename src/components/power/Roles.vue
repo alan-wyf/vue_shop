@@ -123,7 +123,7 @@ export default {
   created () {
     this.getRolesList()
   },
-  methods () {
+  methods: {
     async getRolesList () {
       const { data: res } = await this.$http.get('roles')
       if(res.meta.status !== 200){
@@ -150,7 +150,7 @@ export default {
     async showSetRightDialog (role) {
       this.roleId = role.id
       const { data: res } = await this.$http.get('right/tree')
-      if(res.meta.status !== 200){
+      if (res.meta.status !== 200) {
         return this.$message.error('权限数据请求失败')
       }
       this.rightslist = res.data
@@ -158,22 +158,22 @@ export default {
       this.setRightDialogVisible = true
     },
     getleafKeys (node, arr) {
-      if(!node.children) {
+      if (!node.children) {
         return arr.push(node.id)
       }
       node.children.forEach(item => this.getleafKeys(item, arr))
     },
-    setRightDialogClosed() {
+    setRightDialogClosed () {
       this.defKeys = []
     },
-    async allotRights() {
+    async allotRights () {
       const key = [
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
-      const idStr = kets.join(',')
-      const { data: res } = await this.$http.post(`roles/${this.roleId}/rights`,{rids: idStr})
-      if(res.meta.status !== 200){
+      const idStr = key.join(',')
+      const { data: res } = await this.$http.post(`roles/${this.roleId}/rights`, {rids: idStr})
+      if (res.meta.status !== 200) {
         return this.$message.error('权限修改失败')
       }
       this.$message.success('权限修改成功')

@@ -234,7 +234,7 @@ export default {
   created () {
     this.getUserList()
   },
-  methods () {
+  methods: {
     async getUserList () {
       const { data: res } = await this.$http.get('users', {param: this.queryInfo})
       if (res.meta.status !== 200) {
